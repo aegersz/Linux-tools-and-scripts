@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# prefixes parameters against all files in the current directory
+#
+# accepts any number of args
+#
+# to list and then execute the command: "sh filecmd.sh wc -l | sh"
+
+
+if [ -z "$1" ]; then
+        echo "no command(s) entered"
+        exit 255
+fi
+
+n=("$*")
+
+# the ls "-p" and "| grep -v /" eliminates directories
+#
+ls -1atrp | grep -v / | sed "s/^\(.*\)$/$n \1/"
+
